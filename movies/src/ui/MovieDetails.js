@@ -15,7 +15,6 @@ import { getloadPersons } from "../ducks/flow/selectors";
 import { flowActors, flowPersons } from "../ducks/flow/actions";
 import * as _ from "lodash";
 import ActorForm from "./ActorForm";
-import { Box } from "@mui/system";
 
 function MovieDetails({ getMovie, getPerson, getMovieActors, getPersonsList, persons, load, flowPersons, personsFullNames, flowActors }, props) {
 	const location = useLocation();
