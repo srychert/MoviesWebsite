@@ -51,10 +51,12 @@ function PersonDetails({ movies, getPerson, getMoviesList, flowMovies, load, get
 	}, [getPerson, id, location.state, personFromStore, flowMovies, getMoviesList, load, moviesDirectedByPerson.length, flowActors, getActorsList, loadActors]);
 
 	const disableIfActor = actors.filter((actor) => actor.person_id === id).length !== 0 ? true : false;
-	const actorsMaped = actors.map((actor) => ({
-		...actor,
-		id: actor.movie_id,
-	}));
+	const actorsMaped = actors
+		.filter((actor) => actor.person_id == id)
+		.map((actor) => ({
+			...actor,
+			id: actor.movie_id,
+		}));
 	const moviesPersonPlayedIn = _.intersectionBy(movies, actorsMaped, "id");
 
 	return (
