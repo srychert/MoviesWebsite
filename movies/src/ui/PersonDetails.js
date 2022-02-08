@@ -33,7 +33,14 @@ function PersonDetails({ movies, getPerson, getMoviesList, flowMovies, load, get
 				if (res.error) {
 				} else {
 					flowMovies();
-					if(!loadActors){getActorsList().then((res) => {if(res.error){}else{flowActors(true)}})}
+					if (!loadActors) {
+						getActorsList().then((res) => {
+							if (res.error) {
+							} else {
+								flowActors(true);
+							}
+						});
+					}
 				}
 			});
 		}
@@ -43,12 +50,12 @@ function PersonDetails({ movies, getPerson, getMoviesList, flowMovies, load, get
 		if (personFromStore) setPerson(personFromStore);
 	}, [getPerson, id, location.state, personFromStore, flowMovies, getMoviesList, load, moviesDirectedByPerson.length, flowActors, getActorsList, loadActors]);
 
-	const disableIfActor = actors.filter(actor => actor.person_id === id).length !== 0 ? true: false
-	const actorsMaped = actors.map(actor => ({
-		id: actor.movie_id,
+	const disableIfActor = actors.filter((actor) => actor.person_id === id).length !== 0 ? true : false;
+	const actorsMaped = actors.map((actor) => ({
 		...actor,
-	}))
-	const moviesPersonPlayedIn= _.intersectionBy(movies, actorsMaped, "id");
+		id: actor.movie_id,
+	}));
+	const moviesPersonPlayedIn = _.intersectionBy(movies, actorsMaped, "id");
 
 	return (
 		<Container>
