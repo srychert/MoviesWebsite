@@ -8,6 +8,7 @@ import { getPersonsList, deletePerson } from "../ducks/persons/operations";
 import { getPersonsByNationality, searchPersonsByName, sortPersons } from "../ducks/persons/selectors";
 import PersonCard from "./PersonCard";
 import * as _ from "lodash";
+import { motion } from "framer-motion";
 
 const PersonsList = ({ getPersonsList, flowPersons, load }, props) => {
 	const [personsError, setPersonsError] = useState(false);
@@ -85,8 +86,10 @@ const PersonsList = ({ getPersonsList, flowPersons, load }, props) => {
 							</FormControl>
 						</Grid>
 					</Grid>
+				</Grid>
+				<Grid className="mygrid" container spacing={3} component={motion.div} layout>
 					{_.intersectionBy(...persons, "id").map((person) => (
-						<Grid item xs={12} sm={12} md={6} lg={4} xl={3} key={person.id}>
+						<Grid item xs={12} sm={12} md={6} lg={4} xl={3} key={person.id} component={motion.div} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
 							<PersonCard person={person} disableDelete={true} />
 						</Grid>
 					))}
